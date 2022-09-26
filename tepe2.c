@@ -3,33 +3,35 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct celula{
- int linha;
- int coluna;
- int valor;
-};
+// struct celula{
+//  int linha;
+//  int coluna;
+//  int valor;
+// };
 
-struct MatrizEsparsa{
-  //Matriz de célula para compor o tabuleiro  
-  struct celula celulas[100][100];
-};
+// struct MatrizEsparsa{
+//   //Matriz de célula para compor o tabuleiro  
+//   struct celula celulas[100][100];
+// };
 
 
 int MatrizCria(MatrizEsparsa **m){
-    int i,j;
-    TADCelula *mat = malloc(mat->linha * sizeof (MatrizEsparsa));
-    for( i = 0;i < mat->linha;i++){
-        mat[i] = malloc(mat->coluna * sizeof(MatrizEsparsa));
+   
+    //Aloca a matriz
+    *m = (MatrizEsparsa*) malloc(sizeof(MatrizEsparsa));
+    if(*m == NULL){
+        return 0;
     }
-
-    for (i=0; i < mat->linha; i++){
-        for (j=0; j < mat->coluna; j++){
-            m[i][j] = 0;
+    //Inicializa a matriz
+    for(int i = 0; i < 100; i++){
+        for(int j = 0; j < 100; j++){
+            (*m)->linha[i] = 0;
+            (*m)->col[j] = 0;
         }
     }
-
-    if (*m == NULL ) {
-        printf ("Memoria insuficiente !\n");
-        exit (1);
-  } 
+    return 1;
 }
+
+void MatrizDestroi(MatrizEsparsa **m){
+    free(*m);
+};
